@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "thanapech.t@gmail.com",
+      "password": "123456",
+      "name": "thanapech",
+      "surname": "tunwanarutsakul",
+      "token": "M6ODG4XSRDC9ICIJZN2N1M"
+    },
+    {
+      "id": 2,
+      "email": "thanapech.t+1@gmail.com",
+      "password": "123456",
+      "name": "thanapechza",
+      "surname": "tunwanarutsakulza",
+      "token": "C68K97X6X4D5LDZC1HCWEB"
+    }
+  ]
+}

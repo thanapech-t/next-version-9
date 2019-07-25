@@ -93,6 +93,72 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./components/Landing.js":
+/*!*******************************!*\
+  !*** ./components/Landing.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ducks_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ducks/auth */ "./ducks/auth/index.js");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd */ "antd");
+/* harmony import */ var antd__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(antd__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var recompose__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! recompose */ "recompose");
+/* harmony import */ var recompose__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(recompose__WEBPACK_IMPORTED_MODULE_5__);
+var _jsxFileName = "D:\\project\\next-v-9\\components\\Landing.js";
+
+
+
+
+
+
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
+  displayName: "Landing__Container",
+  componentId: "sc-7746ay-0"
+})(["display:flex;justify-content:center;align-items:center;"]);
+var LogoutButton = styled_components__WEBPACK_IMPORTED_MODULE_1___default()(antd__WEBPACK_IMPORTED_MODULE_3__["Button"]).withConfig({
+  displayName: "Landing__LogoutButton",
+  componentId: "sc-7746ay-1"
+})(["width:fit-content;margin:0 auto;"]);
+
+var Landing = function Landing(_ref) {
+  var logout = _ref.logout;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: this
+  }, "LANdingggggggggggggg", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LogoutButton, {
+    type: "primary",
+    onClick: function onClick() {
+      return logout();
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: this
+  }, "LogoutButton"));
+};
+
+var enhancer = Object(recompose__WEBPACK_IMPORTED_MODULE_5__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(function (state) {
+  return {};
+}, {
+  logout: _ducks_auth__WEBPACK_IMPORTED_MODULE_2__["logout"]
+}));
+/* harmony default export */ __webpack_exports__["default"] = (enhancer(Landing));
+
+/***/ }),
+
 /***/ "./components/Login.js":
 /*!*****************************!*\
   !*** ./components/Login.js ***!
@@ -147,8 +213,8 @@ var Submit = styled_components__WEBPACK_IMPORTED_MODULE_2___default()(antd__WEBP
 var validate = function validate(value) {
   var error = {};
 
-  if (!value.id) {
-    error.id = 'please fill';
+  if (!value.email) {
+    error.email = 'please fill';
   }
 
   if (!value.password) {
@@ -180,9 +246,9 @@ var Login = function Login(_ref) {
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(CustomField, {
-    name: "id",
+    name: "email",
     type: "text",
-    placeholder: "id",
+    placeholder: "email",
     addonBefore: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(antd__WEBPACK_IMPORTED_MODULE_8__["Icon"], {
       type: "user",
       __source: {
@@ -546,6 +612,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helper */ "./ducks/helper.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -565,6 +633,7 @@ _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.mark(a
 
 
 
+
 var SET_DATA_AUTH = 'SET_DATA_AUTH';
 var GET_DATA_AUTH = 'GET_DATA_AUTH';
 var LOGIN = 'LOGIN';
@@ -574,51 +643,62 @@ var getUserInfo = Object(_helper__WEBPACK_IMPORTED_MODULE_4__["Creator"])(GET_DA
 var login = Object(_helper__WEBPACK_IMPORTED_MODULE_4__["Creator"])(LOGIN, 'data');
 var logout = Object(_helper__WEBPACK_IMPORTED_MODULE_4__["Creator"])(LOGOUT);
 function getUserInfoSaga() {
-  var checkToken;
+  var checkToken, response;
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function getUserInfoSaga$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
-          checkToken = sessionStorage.getItem('loginPlayground');
+          checkToken = sessionStorage.getItem('twittee');
+          _context.next = 4;
+          return axios__WEBPACK_IMPORTED_MODULE_5___default.a.get('/api/auth', {
+            params: {
+              token: checkToken
+            }
+          });
+
+        case 4:
+          response = _context.sent;
 
           if (!checkToken) {
-            _context.next = 5;
+            _context.next = 8;
             break;
           }
 
-          _context.next = 5;
+          _context.next = 8;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(setDataUser({
+            user: response.data,
             isLogin: true
           }));
 
-        case 5:
-          _context.next = 9;
+        case 8:
+          _context.next = 13;
           break;
 
-        case 7:
-          _context.prev = 7;
+        case 10:
+          _context.prev = 10;
           _context.t0 = _context["catch"](0);
+          console.log('getUserInfoSaga error', _context.t0);
 
-        case 9:
-          _context.prev = 9;
-          _context.next = 12;
+        case 13:
+          _context.prev = 13;
+          _context.next = 16;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(setDataUser({
             initialized: true
           }));
 
-        case 12:
-          return _context.finish(9);
+        case 16:
+          return _context.finish(13);
 
-        case 13:
+        case 17:
         case "end":
           return _context.stop();
       }
     }
-  }, _marked, null, [[0, 7, 9, 13]]);
+  }, _marked, null, [[0, 10, 13, 17]]);
 }
 function loginSaga(_ref) {
-  var data;
+  var data, response;
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function loginSaga$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -626,39 +706,43 @@ function loginSaga(_ref) {
           data = _ref.payload.data;
           console.log('data', data);
           _context2.prev = 2;
-          sessionStorage.setItem('loginPlayground', true);
-          _context2.next = 6;
+          _context2.next = 5;
+          return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/auth', data);
+
+        case 5:
+          response = _context2.sent;
+          sessionStorage.setItem('twittee', response.data.token);
+          _context2.next = 9;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(setDataUser({
-            user: {
-              id: data.id
-            },
+            user: response.data,
             isLogin: true
           }));
 
-        case 6:
-          _context2.next = 10;
+        case 9:
+          _context2.next = 14;
           break;
 
-        case 8:
-          _context2.prev = 8;
+        case 11:
+          _context2.prev = 11;
           _context2.t0 = _context2["catch"](2);
+          console.log('loginSaga error', _context2.t0);
 
-        case 10:
-          _context2.prev = 10;
-          _context2.next = 13;
+        case 14:
+          _context2.prev = 14;
+          _context2.next = 17;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(setDataUser({
             isLoading: false
           }));
 
-        case 13:
-          return _context2.finish(10);
+        case 17:
+          return _context2.finish(14);
 
-        case 14:
+        case 18:
         case "end":
           return _context2.stop();
       }
     }
-  }, _marked2, null, [[2, 8, 10, 14]]);
+  }, _marked2, null, [[2, 11, 14, 18]]);
 }
 function logoutSaga() {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function logoutSaga$(_context3) {
@@ -1044,7 +1128,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Login */ "./components/Login.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "styled-components");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Landing__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Landing */ "./components/Landing.js");
 var _jsxFileName = "D:\\project\\next-v-9\\pages\\index.js";
+
 
 
 
@@ -1053,17 +1139,23 @@ var Container = styled_components__WEBPACK_IMPORTED_MODULE_2___default.a.div.wit
   componentId: "sc-1a9z5du-0"
 })(["display:flex;justify-content:center;align-items:center;"]);
 
-var Auth = function Auth() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
+var Auth = function Auth(props) {
+  return console.log(props.isLogin) || react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12
+      lineNumber: 14
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Login__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, props.isLogin ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Landing__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 14
+    },
+    __self: this
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Login__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
     },
     __self: this
   }));
@@ -1093,6 +1185,17 @@ module.exports = __webpack_require__(/*! D:\project\next-v-9\pages\index.js */".
 /***/ (function(module, exports) {
 
 module.exports = require("antd");
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 

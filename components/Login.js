@@ -36,8 +36,8 @@ const Submit = styled(Button)`
 
 const validate = value => {
   const error = {}
-  if (!value.id) {
-    error.id = 'please fill'
+  if (!value.email) {
+    error.email = 'please fill'
   }
   if (!value.password) {
     error.password = 'please fill'
@@ -50,9 +50,9 @@ const Login = ({ isLoading, login, handleSubmit, ...props }) => (
   <Container onSubmit={handleSubmit(values => login(values))}>
     <Form>
       <CustomField
-        name="id"
+        name="email"
         type="text"
-        placeholder="id"
+        placeholder="email"
         addonBefore={<Icon type="user" />}
       />
       <CustomField

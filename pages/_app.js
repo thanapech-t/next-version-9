@@ -1,24 +1,25 @@
 import App, { Container } from 'next/app'
-import React from 'react'
+import React, { useEffect } from 'react'
 // import withReduxStore from '../libs/with-redux-store'
 import { Provider, connect } from 'react-redux'
 import store from '../ducks/'
 import { GlobalStyle } from '../style'
 import { compose, lifecycle } from 'recompose'
+import { getUserInfo } from '../ducks/auth'
 
 const bodyEnhancer = compose(
   connect(
     state => {
-      return {}
+      return {
+        isLogin: state.auth.isLogin,
+      }
     },
-    {},
+    { getUserInfo },
   ),
-  lifecycle({
-    componentDidMount() {},
-  }),
 )
 
-const Body = bodyEnhancer(({ Component, ...OtherProps }) => {
+const Body = bodyEnhancer(({ Component, getUserInfo, ...OtherProps }) => {
+  useEffect(() => getUserInfo(), [])
   return <Component {...OtherProps} />
 })
 

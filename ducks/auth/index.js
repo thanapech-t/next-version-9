@@ -1,5 +1,6 @@
 import { put, takeLatest, delay } from 'redux-saga/effects'
 import { createReducer, Creator } from '../helper'
+import axios from 'axios'
 
 const SET_DATA_AUTH = 'SET_DATA_AUTH'
 const GET_DATA_AUTH = 'GET_DATA_AUTH'
@@ -13,11 +14,18 @@ export const logout = Creator(LOGOUT)
 
 export function* getUserInfoSaga() {
   try {
-    const checkToken = sessionStorage.getItem('loginPlayground')
+    const checkToken = sessionStorage.getItem('twittee')
+    const response = yield axios.get('/api/auth', {
+      params: {
+        token: checkToken,
+      },
+    })
+
     if (checkToken) {
-      yield put(setDataUser({ isLogin: true }))
+      yield put(setDataUser({ user: response.data, isLogin: true }))
     }
   } catch (error) {
+    console.log('getUserInfoSaga error', error)
   } finally {
     yield put(setDataUser({ initialized: true }))
   }
@@ -26,9 +34,11 @@ export function* getUserInfoSaga() {
 export function* loginSaga({ payload: { data } }) {
   console.log('data', data)
   try {
-    sessionStorage.setItem('loginPlayground', true)
-    yield put(setDataUser({ user: { id: data.id }, isLogin: true }))
+    const response = yield axios.post('/api/auth', data)
+    sessionStorage.setItem('twittee', response.data.token)
+    yield put(setDataUser({ user: response.data, isLogin: true }))
   } catch (error) {
+    console.log('loginSaga error', error)
   } finally {
     yield put(
       setDataUser({
