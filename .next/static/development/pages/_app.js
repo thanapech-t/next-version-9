@@ -115,45 +115,74 @@ function loginSaga(_ref) {
       switch (_context2.prev = _context2.next) {
         case 0:
           data = _ref.payload.data;
-          console.log('data', data);
-          _context2.prev = 2;
+          _context2.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(setDataUser({
+            isLoading: true
+          }));
+
+        case 3:
           _context2.next = 5;
-          return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/auth', data);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["delay"])(1000);
 
         case 5:
+          _context2.prev = 5;
+          _context2.next = 8;
+          return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/auth', data);
+
+        case 8:
           response = _context2.sent;
           sessionStorage.setItem('twittee', response.data.token);
-          _context2.next = 9;
+          _context2.next = 12;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(setDataUser({
             user: response.data,
             isLogin: true
           }));
 
-        case 9:
-          _context2.next = 14;
+        case 12:
+          _context2.next = 25;
           break;
-
-        case 11:
-          _context2.prev = 11;
-          _context2.t0 = _context2["catch"](2);
-          console.log('loginSaga error', _context2.t0);
 
         case 14:
           _context2.prev = 14;
-          _context2.next = 17;
+          _context2.t0 = _context2["catch"](5);
+          _context2.t1 = _context2.t0.response.status;
+          _context2.next = _context2.t1 === 401 ? 19 : 22;
+          break;
+
+        case 19:
+          _context2.next = 21;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(setDataUser({
+            errorMessage: 'email or password is incorrect'
+          }));
+
+        case 21:
+          return _context2.abrupt("break", 25);
+
+        case 22:
+          _context2.next = 24;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(setDataUser({
+            errorMessage: 'server has been down'
+          }));
+
+        case 24:
+          return _context2.abrupt("break", 25);
+
+        case 25:
+          _context2.prev = 25;
+          _context2.next = 28;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(setDataUser({
             isLoading: false
           }));
 
-        case 17:
-          return _context2.finish(14);
+        case 28:
+          return _context2.finish(25);
 
-        case 18:
+        case 29:
         case "end":
           return _context2.stop();
       }
     }
-  }, _marked2, null, [[2, 11, 14, 18]]);
+  }, _marked2, null, [[5, 14, 25, 29]]);
 }
 function logoutSaga() {
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function logoutSaga$(_context3) {
@@ -220,7 +249,7 @@ var initial = {
   initialized: false,
   isLogin: false,
   isLoading: false,
-  routes: []
+  errorMessage: ''
 };
 var reducer = Object(_helper__WEBPACK_IMPORTED_MODULE_4__["createReducer"])(initial, function (state) {
   return Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, SET_DATA_AUTH, function (_ref2) {
@@ -39725,6 +39754,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../style */ "./style.js");
 /* harmony import */ var recompose__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! recompose */ "./node_modules/recompose/dist/Recompose.esm.js");
 /* harmony import */ var _ducks_auth__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../ducks/auth */ "./ducks/auth/index.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 
 
 
@@ -39734,7 +39764,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _jsxFileName = "D:\\project\\next-v-9\\pages\\_app.js";
 
- // import withReduxStore from '../libs/with-redux-store'
+
 
 
 
@@ -39754,12 +39784,12 @@ var Body = bodyEnhancer(function (_ref) {
       OtherProps = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_6__["default"])(_ref, ["Component", "getUserInfo"]);
 
   Object(react__WEBPACK_IMPORTED_MODULE_8__["useEffect"])(function () {
-    return getUserInfo();
+    getUserInfo();
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__["default"])({}, OtherProps, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 25
     },
     __self: this
   }));
@@ -39782,32 +39812,32 @@ function (_App) {
       return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_8___default.a.Fragment, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 29
+          lineNumber: 31
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_app__WEBPACK_IMPORTED_MODULE_7__["Container"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 30
+          lineNumber: 32
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_9__["Provider"], {
         store: _ducks___WEBPACK_IMPORTED_MODULE_10__["default"],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 31
+          lineNumber: 33
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_11__["GlobalStyle"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 32
+          lineNumber: 34
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(Body, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_5__["default"])({}, this.props, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 33
+          lineNumber: 35
         },
         __self: this
       })))));

@@ -9,9 +9,8 @@ const Container = styled.div`
   align-items: center;
 `
 
-const Auth = props =>
-  console.log(props.isLogin) || (
-    <Container>{props.isLogin ? <Landing /> : <Login />}</Container>
-  )
+const Auth = props => (
+  <Container>{props.isLogin ? <Landing /> : <Login />}</Container>
+)
 
 export default Auth

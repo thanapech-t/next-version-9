@@ -1,34 +1,34 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
+import LoadingAnimation from '../../static/images/loading.gif'
 
-import { Spin, Icon } from "antd";
+const Container = styled.div`
+  position: relative;
+`
 
-export const LoadingContainer = styled.div`
-  position: absolute;
-  z-index: 1;
-
-  width: 100%;
-  height: 100%;
+const ContainerLoading = styled.div`
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.8);
+`
+const LoadingGif = styled.img``
 
-  opacity: 0.5;
-  filter: blur(0.5px);
-`;
-
-const CustomIcon = styled(Icon)`
-  font-size: 24px;
-`;
-
-const Loading = ({ className, isLoading = false, children }) => (
-  <Spin
-    className={className}
-    spinning={isLoading}
-    indicator={<CustomIcon type="loading" spin />}
-  >
+const Loading = ({ children, isLoading }) => (
+  <Container>
+    {isLoading && (
+      <ContainerLoading>
+        <LoadingGif src={LoadingAnimation} />
+      </ContainerLoading>
+    )}
     {children}
-  </Spin>
-);
+  </Container>
+)
 
-export default Loading;
+export default Loading

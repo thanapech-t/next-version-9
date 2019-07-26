@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import styled, { ServerStyleSheet } from 'styled-components'
 
 class MyDocument extends Document {
   static getInitialProps({ renderPage, ...otherProps }) {
@@ -23,7 +23,8 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <meta charSet="utf-8" />
-          <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+          <link rel="shortcut icon" href="static/images/Twitter_bird.png" />
+          <title>Twittee</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#000000" />
           <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />

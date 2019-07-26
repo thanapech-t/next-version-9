@@ -32,13 +32,23 @@ export function* getUserInfoSaga() {
 }
 
 export function* loginSaga({ payload: { data } }) {
-  console.log('data', data)
+  yield put(setDataUser({ isLoading: true }))
+  yield delay(1000)
   try {
     const response = yield axios.post('/api/auth', data)
     sessionStorage.setItem('twittee', response.data.token)
     yield put(setDataUser({ user: response.data, isLogin: true }))
   } catch (error) {
-    console.log('loginSaga error', error)
+    switch (error.response.status) {
+      case 401:
+        yield put(
+          setDataUser({ errorMessage: 'email or password is incorrect' }),
+        )
+        break
+      default:
+        yield put(setDataUser({ errorMessage: 'server has been down' }))
+        break
+    }
   } finally {
     yield put(
       setDataUser({
@@ -73,7 +83,7 @@ const initial = {
   initialized: false,
   isLogin: false,
   isLoading: false,
-  routes: [],
+  errorMessage: '',
 }
 
 const reducer = createReducer(initial, state => ({

@@ -1,35 +1,46 @@
 import React from 'react'
 import styled from 'styled-components'
-import { logout } from '../ducks/auth'
-import { Button, Icon } from 'antd'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
+import Layout from './layouts/main'
+import { Input } from 'antd'
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  background-color: #e3e3e3;
+`
+const TextBox = styled(Input.TextArea)``
+
+const ContainerBox = styled.div`
+  width: 500px;
+  height: 150px;
+  background-color: white;
+  border-radius: 5px;
 `
 
-const LogoutButton = styled(Button)`
-  width: fit-content;
-  margin: 0 auto;
+const AvatarImg = styled.img`
+  width: 50px;
+  border-radius: 50%;
 `
 
-const Landing = ({ logout }) => (
+const Landing = ({ user }) => (
   <Container>
-    LANdingggggggggggggg
-    <LogoutButton type="primary" onClick={() => logout()}>
-      LogoutButton
-    </LogoutButton>
+    <ContainerBox>
+      <AvatarImg src={user.avatar} />
+    </ContainerBox>
   </Container>
 )
 
 const enhancer = compose(
   connect(
-    state => ({}),
-    { logout },
+    state => ({
+      user: state.auth.user,
+    }),
+    {},
   ),
 )
 
-export default enhancer(Landing)
+export default Layout(enhancer(Landing))

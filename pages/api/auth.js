@@ -8,11 +8,6 @@ const randomToken = () =>
     .toUpperCase()
 
 export default function handle(req, res) {
-  console.log('reqest ==>>>>', req)
-  console.log('body', req.body) // The request body
-  console.log('query', req.query) // The url querystring
-  console.log('cookies', req.cookies) // The passed cookies
-  console.log('method', req.method) // The passed cookies
   const { method, body, query } = req
 
   if (method === 'GET') {
