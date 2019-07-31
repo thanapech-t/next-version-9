@@ -4,6 +4,8 @@ import LoadingAnimation from '../../static/images/loading.gif'
 
 const Container = styled.div`
   position: relative;
+  width: 100vw;
+  height: 100vw;
 `
 
 const ContainerLoading = styled.div`

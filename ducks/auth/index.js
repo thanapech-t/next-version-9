@@ -22,7 +22,7 @@ export function* getUserInfoSaga() {
     })
 
     if (checkToken) {
-      yield put(setDataUser({ user: response.data, isLogin: true }))
+      yield put(setDataUser({ user: response.data.user, isLogin: true }))
     }
   } catch (error) {
     console.log('getUserInfoSaga error', error)
@@ -36,8 +36,8 @@ export function* loginSaga({ payload: { data } }) {
   yield delay(1000)
   try {
     const response = yield axios.post('/api/auth', data)
-    sessionStorage.setItem('twittee', response.data.token)
-    yield put(setDataUser({ user: response.data, isLogin: true }))
+    sessionStorage.setItem('twittee', response.data.user.token)
+    yield put(setDataUser({ user: response.data.user, isLogin: true }))
   } catch (error) {
     switch (error.response.status) {
       case 401:

@@ -13,9 +13,9 @@ export default function handle(req, res) {
   if (method === 'GET') {
     const user = database.users.find(value => value.token === query.token)
     if (user) {
-      res.send(user)
+      res.status(200).json({ user })
     } else {
-      res.status(404).send('user not found')
+      res.status(404).json({ error: 'user not found' })
     }
   }
 
@@ -27,9 +27,9 @@ export default function handle(req, res) {
       const token = randomToken() + randomToken()
       const newUser = { ...user, token }
       axios.put(`http://localhost:3004/users/${user.id}`, newUser)
-      res.send(newUser)
+      res.status(200).json({ user: newUser })
     } else {
-      res.status(401).send('Unauthorized')
+      res.status(401).json({ error: 'Unauthorized' })
     }
   }
 }

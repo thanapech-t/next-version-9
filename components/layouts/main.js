@@ -11,7 +11,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 `
 
@@ -47,6 +47,13 @@ const AvatarImg = styled.img`
   border-radius: 50%;
 `
 
+const ContainerWrapComponents = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin-top: 80px;
+`
+
 const enhancer = compose(
   connect(
     state => ({
@@ -73,7 +80,9 @@ const HeaderComponents = enhancer(({ user, logout }) => {
 const Layout = WrappedComponent => () => (
   <Container>
     <HeaderComponents />
-    <WrappedComponent />
+    <ContainerWrapComponents>
+      <WrappedComponent />
+    </ContainerWrapComponents>
   </Container>
 )
 
